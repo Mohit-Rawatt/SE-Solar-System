@@ -1,0 +1,120 @@
+/* Common styles for auth forms */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Bai Jamjuree', sans-serif;
+}
+
+.auth-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.auth-form {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    width: 400px;
+    color: white;
+}
+
+.auth-form h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #64b5f6;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+}
+
+.form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #64b5f6, #42a5f5);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin-top: 1rem;
+}
+
+.auth-btn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #42a5f5, #2196f3);
+}
+
+.auth-links {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.auth-links a {
+    color: #64b5f6;
+    text-decoration: none;
+    font-size: 14px;
+    margin: 0 10px;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    color: #ff6b6b;
+    text-align: center;
+    margin-bottom: 1rem;
+    display: none;
+}
+
+.success-message {
+    color: #4caf50;
+    text-align: center;
+    margin-bottom: 1rem;
+    display: none;
+}
+
+/* Form visibility */
+#loginForm, #registerForm, #forgotPasswordForm {
+    display: none;
+}
+
+#loginForm.active,
+#registerForm.active,
+#forgotPasswordForm.active {
+    display: block;
+}

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login — Solar System Simulator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500&family=Chivo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --card-w:420px;
+      --accent:#87CEEB;
+      --muted:#9fd7ff;
+    }
+    html,body{height:100%;}
+    body{
+      margin:0;
+      min-height:100vh;
+      background:radial-gradient(circle at 20% 20%, #07111b 0%, #02040a 60%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-family:'Chivo',sans-serif;
+      color:#fff;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    .login-card{
+      width:var(--card-w);
+      max-width:calc(100% - 32px);
+      padding:28px 28px;
+      border-radius:16px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow:0 20px 60px rgba(0,0,0,0.6);
+      border:1px solid rgba(255,255,255,0.04);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      box-sizing:border-box;
+    }
+
+    h1{
+      margin:0 0 6px;
+      font-family:'Bai Jamjuree',sans-serif;
+      text-align:center;
+      color:var(--accent);
+      font-size:20px;
+      letter-spacing:0.6px;
+    }
+
+    .auth-container{display:flex;flex-direction:column;gap:6px;width:100%}
+
+    .auth-form{
+      display:none;
+      width:100%;
+      box-sizing:border-box;
+      padding:12px 0 0 0;
+    }
+    .auth-form.active{display:block}
+
+    .field{margin-bottom:12px}
+    label{display:block;font-size:12px;margin-bottom:6px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+    input{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:#fff;font-size:14px;box-sizing:border-box}
+
+    .btn{width:100%;margin-top:8px;padding:12px;border-radius:10px;border:none;background:linear-gradient(45deg,#4B0082,var(--accent));color:#fff;font-weight:700;cursor:pointer;font-size:14px}
+
+    .links{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:8px}
+    .links a{color:var(--muted);text-decoration:none;font-size:13px}
+
+    .message{font-size:13px;text-align:center;margin-top:6px}
+
+    /* Message boxes */
+    .error-message, .success-message{display:none;padding:8px 10px;border-radius:8px;font-size:13px;margin-bottom:8px}
+    .error-message{background:rgba(255,107,107,0.08);color:#FFB3B3;border:1px solid rgba(255,107,107,0.12)}
+    .success-message{background:rgba(107,203,119,0.06);color:#BFF0C4;border:1px solid rgba(107,203,119,0.1)}
+
+    /* Responsive tweaks */
+    @media (max-width:480px){
+      .login-card{padding:20px}
+      h1{font-size:18px}
+    }
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <div id="authContainer" class="auth-container">
+      <!-- Login Form -->
+      <form id="loginForm" class="auth-form active" onsubmit="handleLogin(event)">
+        <h1>Sign In</h1>
+        <div class="error-message" style="display:none"></div>
+        <div class="success-message" style="display:none"></div>
+        <div class="field">
+          <label for="loginUsername">Username</label>
+          <input id="loginUsername" type="text" required />
+        </div>
+        <div class="field">
+          <label for="loginPassword">Password</label>
+          <input id="loginPassword" type="password" required />
+        </div>
+        <button class="btn" type="submit">Sign in</button>
+        <div class="links">
+          <a href="#" onclick="showForm('registerForm')">Register</a>
+          <a href="#" onclick="showForm('forgotPasswordForm')">Forgot?</a>
+        </div>
+      </form>
+
+      <!-- Registration Form -->
+  <form id="registerForm" class="auth-form" onsubmit="handleRegister(event)">
+        <h1>Create Account</h1>
+        <div class="error-message" style="display:none"></div>
+        <div class="success-message" style="display:none"></div>
+        <div class="field">
+          <label for="registerUsername">Username</label>
+          <input id="registerUsername" type="text" required />
+        </div>
+        <div class="field">
+          <label for="registerEmail">Email</label>
+          <input id="registerEmail" type="email" required />
+        </div>
+        <div class="field">
+          <label for="registerPassword">Password</label>
+          <input id="registerPassword" type="password" required />
+        </div>
+        <div class="field">
+          <label for="confirmPassword">Confirm Password</label>
+          <input id="confirmPassword" type="password" required />
+        </div>
+        <button class="btn" type="submit">Register</button>
+        <div class="links">
+          <a href="#" onclick="showForm('loginForm')">Back to Login</a>
+        </div>
+      </form>
+
+      <!-- Forgot Password Form -->
+  <form id="forgotPasswordForm" class="auth-form" onsubmit="handleForgotPassword(event)">
+        <h1>Reset Password</h1>
+        <div class="error-message" style="display:none"></div>
+        <div class="success-message" style="display:none"></div>
+        <div class="field">
+          <label for="forgotEmail">Email</label>
+          <input id="forgotEmail" type="email" required />
+        </div>
+        <button class="btn" type="submit">Reset</button>
+        <div class="links">
+          <a href="#" onclick="showForm('loginForm')">Back to Login</a>
+        </div>
+      </form>
+    </div>
+    <div class="message">
+      <a href="index1.html" style="color:#fff;opacity:0.8">Back to App (guest)</a>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>
